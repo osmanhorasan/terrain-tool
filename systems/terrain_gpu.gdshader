@@ -54,38 +54,34 @@ void fragment() {
 	if (view_mode == 1) {
 		ALBEDO = vec3(clamp(vh * 0.04 + 0.3, 0.0, 1.0));
 		ROUGHNESS = 1.0;
-		return;
-	}
-	if (view_mode == 2) {
+	} else if (view_mode == 2) {
 		float sl = clamp(slope * 4.0, 0.0, 1.0);
 		ALBEDO = vec3(sl, 1.0 - sl, 0.0);
 		ROUGHNESS = 1.0;
-		return;
-	}
-	if (view_mode == 3) {
+	} else if (view_mode == 3) {
 		ALBEDO = splat_debug(s1, s2);
 		ROUGHNESS = 1.0;
-		return;
+	} else {
+		s1 = smoothstep(0.15, 0.85, s1);
+		s2 = smoothstep(0.15, 0.85, s2);
+		float total = max(s1.r + s1.g + s1.b + s1.a + s2.r + s2.g + s2.b + s2.a, 0.001);
+		vec3 col = vec3(0.0);
+		col += texture(layer0, tuv * uv_tiling).rgb * s1.r;
+		col += texture(layer1, tuv * uv_tiling).rgb * s1.g;
+		col += texture(layer2, tuv * uv_tiling).rgb * s1.b;
+		col += texture(layer3, tuv * uv_tiling).rgb * s1.a;
+		col += texture(layer4, tuv * uv_tiling).rgb * s2.r;
+		col += texture(layer5, tuv * uv_tiling).rgb * s2.g;
+		col += texture(layer6, tuv * uv_tiling).rgb * s2.b;
+		col += texture(layer7, tuv * uv_tiling).rgb * s2.a;
+		ALBEDO = col / total;
+		if (view_mode == 4) { // contour lines every 5m
+			float lw = fwidth(vh) * 1.5 + 0.05;
+			float d = abs(fract(vh / 5.0 + 0.5) - 0.5) * 5.0;
+			float line = 1.0 - smoothstep(0.0, lw, d);
+			ALBEDO = mix(ALBEDO, vec3(0.05), line);
+		}
+		ROUGHNESS = 0.9;
+		SPECULAR = 0.2;
 	}
-	s1 = smoothstep(0.15, 0.85, s1);
-	s2 = smoothstep(0.15, 0.85, s2);
-	float total = max(s1.r + s1.g + s1.b + s1.a + s2.r + s2.g + s2.b + s2.a, 0.001);
-	vec3 col = vec3(0.0);
-	col += texture(layer0, tuv * uv_tiling).rgb * s1.r;
-	col += texture(layer1, tuv * uv_tiling).rgb * s1.g;
-	col += texture(layer2, tuv * uv_tiling).rgb * s1.b;
-	col += texture(layer3, tuv * uv_tiling).rgb * s1.a;
-	col += texture(layer4, tuv * uv_tiling).rgb * s2.r;
-	col += texture(layer5, tuv * uv_tiling).rgb * s2.g;
-	col += texture(layer6, tuv * uv_tiling).rgb * s2.b;
-	col += texture(layer7, tuv * uv_tiling).rgb * s2.a;
-	ALBEDO = col / total;
-	if (view_mode == 4) { // contour lines every 5m
-		float lw = fwidth(vh) * 1.5 + 0.05;
-		float d = abs(fract(vh / 5.0 + 0.5) - 0.5) * 5.0;
-		float line = 1.0 - smoothstep(0.0, lw, d);
-		ALBEDO = mix(ALBEDO, vec3(0.05), line);
-	}
-	ROUGHNESS = 0.9;
-	SPECULAR = 0.2;
 }

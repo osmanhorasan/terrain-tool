@@ -17,8 +17,8 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 config/name="Terrain Tool"
 config/description="Standalone terrain editor that exports Godot-ready scenes (.tscn + resources)."
 run/main_scene="res://main.tscn"
-config/icon="res://icon.png"
 config/features=PackedStringArray("4.7", "Forward Plus")
+config/icon="res://icon.png"
 
 [display]
 
