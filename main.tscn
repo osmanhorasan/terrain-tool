@@ -1,0 +1,155 @@
+[gd_scene load_steps=14 format=3]
+
+[ext_resource type="Script" path="res://main.gd" id="1"]
+[ext_resource type="PackedScene" path="res://ui/brush_panel.tscn" id="2"]
+
+[sub_resource type="ProceduralSkyMaterial" id="sky_mat"]
+sky_top_color = Color(0.34, 0.54, 0.83, 1)
+sky_horizon_color = Color(0.72, 0.8, 0.9, 1)
+ground_bottom_color = Color(0.25, 0.22, 0.18, 1)
+ground_horizon_color = Color(0.65, 0.6, 0.52, 1)
+
+[sub_resource type="Sky" id="sky"]
+sky_material = SubResource("sky_mat")
+
+[sub_resource type="Environment" id="env"]
+background_mode = 2
+sky = SubResource("sky")
+ambient_light_source = 3
+ambient_light_energy = 1.0
+ambient_light_sky_contribution = 0.9
+reflected_light_source = 2
+tonemap_mode = 2
+fog_enabled = true
+fog_density = 0.0018
+fog_sky_affect = 0.3
+
+[sub_resource type="TorusMesh" id="cursor_mesh"]
+inner_radius = 0.93
+outer_radius = 1.0
+rings = 64
+ring_segments = 12
+
+[sub_resource type="StandardMaterial3D" id="cursor_mat"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0.45, 1.0, 0.45, 0.85)
+no_depth_test = true
+
+[sub_resource type="PlaneMesh" id="ground_mesh"]
+size = Vector2(3000, 3000)
+
+[sub_resource type="StandardMaterial3D" id="ground_mat"]
+albedo_color = Color(0.15, 0.2, 0.12, 1)
+roughness = 1.0
+
+[sub_resource type="StandardMaterial3D" id="water_mat"]
+transparency = 1
+albedo_color = Color(0.12, 0.35, 0.5, 0.62)
+roughness = 0.15
+metallic = 0.2
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1")
+
+[node name="CameraPivot" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot"]
+far = 4000.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+rotation = Vector3(-0.9, 0.8, 0.0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("env")
+
+[node name="Ground" type="MeshInstance3D" parent="."]
+transform = Transform(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -16, 0)
+mesh = SubResource("ground_mesh")
+material_override = SubResource("ground_mat")
+
+[node name="Terrain" type="Node3D" parent="."]
+
+[node name="Water" type="MeshInstance3D" parent="."]
+transform = Transform(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6, 0)
+visible = false
+mesh = SubResource("ground_mesh")
+material_override = SubResource("water_mat")
+
+[node name="Foliage" type="Node3D" parent="."]
+
+[node name="BrushCursor" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("cursor_mesh")
+material_override = SubResource("cursor_mat")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="MenuBar" type="MenuBar" parent="UI"]
+anchor_right = 1.0
+
+[node name="BrushPanel" parent="UI" instance=ExtResource("2")]
+
+[node name="Minimap" type="TextureRect" parent="UI"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = -216.0
+offset_right = 188.0
+offset_bottom = -36.0
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Marker" type="ColorRect" parent="UI/Minimap"]
+custom_minimum_size = Vector2(6, 6)
+color = Color(1, 1, 1, 1)
+
+[node name="StatusBar" type="PanelContainer" parent="UI"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -26.0
+grow_vertical = 0
+
+[node name="StatusLabel" type="Label" parent="UI/StatusBar"]
+theme_override_font_sizes/font_size = 12
+text = "Ready"
+
+[node name="ExportDialog" type="FileDialog" parent="UI"]
+title = "Export terrain to folder"
+size = Vector2i(800, 600)
+file_mode = 2
+access = 2
+
+[node name="ExportGlbDialog" type="FileDialog" parent="UI"]
+title = "Export terrain as glTF"
+size = Vector2i(800, 600)
+file_mode = 4
+access = 2
+filters = PackedStringArray("*.glb ; glTF binary")
+
+[node name="SaveDialog" type="FileDialog" parent="UI"]
+title = "Save terrain project"
+size = Vector2i(800, 600)
+file_mode = 4
+access = 2
+filters = PackedStringArray("*.tres ; Terrain project")
+
+[node name="OpenDialog" type="FileDialog" parent="UI"]
+title = "Open terrain project"
+size = Vector2i(800, 600)
+access = 2
+filters = PackedStringArray("*.tres ; Terrain project")
+
+[node name="ImportDialog" type="FileDialog" parent="UI"]
+title = "Import heightmap image"
+size = Vector2i(800, 600)
+access = 2
+filters = PackedStringArray("*.png,*.jpg,*.jpeg,*.webp,*.exr ; Heightmap image")
+
+[node name="NoticeDialog" type="AcceptDialog" parent="UI"]
+title = "Terrain Tool"
+
+[node name="ConfirmDialog" type="ConfirmationDialog" parent="UI"]
+dialog_text = "You have unsaved changes. Discard them?"

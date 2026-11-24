@@ -1,0 +1,261 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://ui/brush_panel.gd" id="1"]
+
+[node name="BrushPanel" type="PanelContainer"]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -280.0
+offset_top = 30.0
+offset_bottom = -26.0
+grow_horizontal = 0
+script = ExtResource("1")
+
+[node name="Scroll" type="ScrollContainer" parent="."]
+horizontal_scroll_mode = 0
+
+[node name="Margin" type="MarginContainer" parent="Scroll"]
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBox" type="VBoxContainer" parent="Scroll/Margin"]
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="Title" type="Label" parent="Scroll/Margin/VBox"]
+theme_override_font_sizes/font_size = 20
+text = "Terrain Tool"
+
+[node name="Hints" type="Label" parent="Scroll/Margin/VBox"]
+theme_override_colors/font_color = Color(1, 1, 1, 0.55)
+theme_override_font_sizes/font_size = 12
+text = "LMB sculpt/paint
+Shift+LMB smooth  Ctrl+LMB invert
+Alt+LMB raise only
+Ctrl+Alt+LMB lower only
+[ ] radius   - = strength
+RMB orbit / MMB pan / wheel zoom
+RMB+WASD fly   F12 screenshot"
+
+[node name="Sep1" type="HSeparator" parent="Scroll/Margin/VBox"]
+
+[node name="ViewLabel" type="Label" parent="Scroll/Margin/VBox"]
+text = "View"
+
+[node name="ViewOption" type="OptionButton" parent="Scroll/Margin/VBox"]
+unique_name_in_owner = true
+
+[node name="ModeLabel" type="Label" parent="Scroll/Margin/VBox"]
+text = "Mode"
+
+[node name="ModeOption" type="OptionButton" parent="Scroll/Margin/VBox"]
+unique_name_in_owner = true
+
+[node name="RadiusLabel" type="Label" parent="Scroll/Margin/VBox"]
+unique_name_in_owner = true
+text = "Radius"
+
+[node name="RadiusSlider" type="HSlider" parent="Scroll/Margin/VBox"]
+unique_name_in_owner = true
+min_value = 1.0
+max_value = 40.0
+step = 0.5
+value = 6.0
+
+[node name="StrengthLabel" type="Label" parent="Scroll/Margin/VBox"]
+unique_name_in_owner = true
+text = "Strength"
+
+[node name="StrengthSlider" type="HSlider" parent="Scroll/Margin/VBox"]
+unique_name_in_owner = true
+min_value = 0.01
+max_value = 1.0
+step = 0.01
+value = 0.4
+
+[node name="FalloffLabel" type="Label" parent="Scroll/Margin/VBox"]
+unique_name_in_owner = true
+text = "Falloff"
+
+[node name="FalloffSlider" type="HSlider" parent="Scroll/Margin/VBox"]
+unique_name_in_owner = true
+min_value = 0.0
+max_value = 1.0
+step = 0.01
+value = 0.5
+
+[node name="Sep2" type="HSeparator" parent="Scroll/Margin/VBox"]
+
+[node name="UndoRow" type="HBoxContainer" parent="Scroll/Margin/VBox"]
+theme_override_constants/separation = 8
+
+[node name="UndoBtn" type="Button" parent="Scroll/Margin/VBox/UndoRow"]
+unique_name_in_owner = true
+size_flags_horizontal = 3
+text = "Undo"
+
+[node name="RedoBtn" type="Button" parent="Scroll/Margin/VBox/UndoRow"]
+unique_name_in_owner = true
+size_flags_horizontal = 3
+text = "Redo"
+
+[node name="Sep3" type="HSeparator" parent="Scroll/Margin/VBox"]
+
+[node name="TerrainLabel" type="Label" parent="Scroll/Margin/VBox"]
+text = "Auto material"
+
+[node name="SnowlineLabel" type="Label" parent="Scroll/Margin/VBox"]
+unique_name_in_owner = true
+text = "Snowline"
+
+[node name="SnowlineSlider" type="HSlider" parent="Scroll/Margin/VBox"]
+unique_name_in_owner = true
+min_value = -20.0
+max_value = 60.0
+step = 0.5
+value = 18.0
+
+[node name="RockSlopeLabel" type="Label" parent="Scroll/Margin/VBox"]
+unique_name_in_owner = true
+text = "Rock slope"
+
+[node name="RockSlopeSlider" type="HSlider" parent="Scroll/Margin/VBox"]
+unique_name_in_owner = true
+min_value = 10.0
+max_value = 90.0
+step = 1.0
+value = 40.0
+
+[node name="SandlineLabel" type="Label" parent="Scroll/Margin/VBox"]
+unique_name_in_owner = true
+text = "Sandline"
+
+[node name="SandlineSlider" type="HSlider" parent="Scroll/Margin/VBox"]
+unique_name_in_owner = true
+min_value = -20.0
+max_value = 20.0
+step = 0.5
+value = 0.0
+
+[node name="AutoMatBtn" type="Button" parent="Scroll/Margin/VBox"]
+unique_name_in_owner = true
+text = "Apply auto-material"
+
+[node name="WaterCheck" type="CheckBox" parent="Scroll/Margin/VBox"]
+unique_name_in_owner = true
+text = "Show water"
+
+[node name="WaterLabel" type="Label" parent="Scroll/Margin/VBox"]
+unique_name_in_owner = true
+text = "Water level"
+
+[node name="WaterSlider" type="HSlider" parent="Scroll/Margin/VBox"]
+unique_name_in_owner = true
+min_value = -16.0
+max_value = 40.0
+step = 0.5
+value = -6.0
+
+[node name="SepTools" type="HSeparator" parent="Scroll/Margin/VBox"]
+
+[node name="ToolsLabel" type="Label" parent="Scroll/Margin/VBox"]
+text = "Tools"
+
+[node name="ErodeLabel" type="Label" parent="Scroll/Margin/VBox"]
+unique_name_in_owner = true
+text = "Erosion"
+
+[node name="ErodeSlider" type="HSlider" parent="Scroll/Margin/VBox"]
+unique_name_in_owner = true
+min_value = 500.0
+max_value = 20000.0
+step = 100.0
+value = 3000.0
+
+[node name="ErodeBtn" type="Button" parent="Scroll/Margin/VBox"]
+unique_name_in_owner = true
+text = "Run hydraulic"
+
+[node name="ThermalLabel" type="Label" parent="Scroll/Margin/VBox"]
+unique_name_in_owner = true
+text = "Thermal"
+
+[node name="ThermalSlider" type="HSlider" parent="Scroll/Margin/VBox"]
+unique_name_in_owner = true
+min_value = 1.0
+max_value = 200.0
+step = 1.0
+value = 30.0
+
+[node name="ThermalBtn" type="Button" parent="Scroll/Margin/VBox"]
+unique_name_in_owner = true
+text = "Run thermal"
+
+[node name="FilterLabel" type="Label" parent="Scroll/Margin/VBox"]
+text = "Filters"
+
+[node name="TerraceLabel" type="Label" parent="Scroll/Margin/VBox"]
+unique_name_in_owner = true
+text = "Terraces"
+
+[node name="TerraceSlider" type="HSlider" parent="Scroll/Margin/VBox"]
+unique_name_in_owner = true
+min_value = 2.0
+max_value = 24.0
+step = 1.0
+value = 8.0
+
+[node name="TerraceBtn" type="Button" parent="Scroll/Margin/VBox"]
+unique_name_in_owner = true
+text = "Apply terraces"
+
+[node name="FilterRow" type="HBoxContainer" parent="Scroll/Margin/VBox"]
+theme_override_constants/separation = 6
+
+[node name="ContrastBtn" type="Button" parent="Scroll/Margin/VBox/FilterRow"]
+unique_name_in_owner = true
+size_flags_horizontal = 3
+text = "Contrast"
+
+[node name="SharpenBtn" type="Button" parent="Scroll/Margin/VBox/FilterRow"]
+unique_name_in_owner = true
+size_flags_horizontal = 3
+text = "Sharpen"
+
+[node name="SmoothAllBtn" type="Button" parent="Scroll/Margin/VBox/FilterRow"]
+unique_name_in_owner = true
+size_flags_horizontal = 3
+text = "Smooth"
+
+[node name="FoliageLabel" type="Label" parent="Scroll/Margin/VBox"]
+unique_name_in_owner = true
+text = "Foliage"
+
+[node name="FoliageSlider" type="HSlider" parent="Scroll/Margin/VBox"]
+unique_name_in_owner = true
+min_value = 0.0
+max_value = 3000.0
+step = 50.0
+value = 400.0
+
+[node name="FoliageBtn" type="Button" parent="Scroll/Margin/VBox"]
+unique_name_in_owner = true
+text = "Scatter foliage"
+
+[node name="Sep4" type="HSeparator" parent="Scroll/Margin/VBox"]
+
+[node name="ExportBtn" type="Button" parent="Scroll/Margin/VBox"]
+unique_name_in_owner = true
+text = "Export .tscn..."
+
+[node name="ExportGlbBtn" type="Button" parent="Scroll/Margin/VBox"]
+unique_name_in_owner = true
+text = "Export .glb..."
+
+[node name="ResetBtn" type="Button" parent="Scroll/Margin/VBox"]
+unique_name_in_owner = true
+text = "Reset terrain"
