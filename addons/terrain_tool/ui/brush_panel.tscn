@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://ui/brush_panel.gd" id="1"]
+[ext_resource type="Script" path="res://addons/terrain_tool/ui/brush_panel.gd" id="1"]
 
 [node name="BrushPanel" type="PanelContainer"]
 anchor_left = 1.0

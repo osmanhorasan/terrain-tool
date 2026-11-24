@@ -117,6 +117,21 @@ func clear(root: Node3D = null) -> void:
 			c.free()
 
 
+## Reads instance transforms back from existing Foliage_* MultiMeshInstance
+## children (e.g., after a scene reload) so brush/erase keep working.
+func harvest(root: Node3D) -> void:
+	trees.clear()
+	rocks.clear()
+	for c in root.get_children():
+		var mmi := c as MultiMeshInstance3D
+		if mmi == null or not c.name.begins_with("Foliage_") or c.name == "Foliage_Leaves":
+			continue
+		var target := rocks if c.name == "Foliage_Rocks" else trees
+		for i in mmi.multimesh.instance_count:
+			target.append(mmi.multimesh.get_instance_transform(i))
+	restore_cells()
+
+
 ## Rebuilds the occupancy grid after transforms are restored from a project.
 func restore_cells() -> void:
 	_cells.clear()

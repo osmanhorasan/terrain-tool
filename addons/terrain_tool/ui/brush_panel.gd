@@ -1,3 +1,4 @@
+@tool
 extends PanelContainer
 
 signal sculpt_mode_changed(mode: int)
@@ -104,6 +105,12 @@ func _ready() -> void:
 	_erode_label.text = "Erosion: %d droplets" % int(_erode_slider.value)
 	_foliage_label.text = "Foliage: %d" % int(_foliage_slider.value)
 	_on_sliders(0.0)
+
+
+## Hides controls that only make sense in the standalone app.
+func set_plugin_mode() -> void:
+	for node in [%ExportBtn, %ExportGlbBtn, %WaterCheck, %WaterLabel, %WaterSlider]:
+		node.visible = false
 
 
 func set_undo_state(can_undo: bool, can_redo: bool) -> void:

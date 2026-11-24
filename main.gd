@@ -729,7 +729,7 @@ func _export_tscn(dir: String) -> void:
 	splat.save_png(dir.path_join("terrain_splatmap.png"))
 	splat2.save_png(dir.path_join("terrain_splatmap2.png"))
 	var export_mat := ShaderMaterial.new()
-	export_mat.shader = load("res://systems/terrain.gdshader")
+	export_mat.shader = load("res://addons/terrain_tool/systems/terrain.gdshader")
 	export_mat.set_shader_parameter("uv_tiling", UV_TILING)
 	export_mat.set_shader_parameter("splatmap", _save_pct(splat, dir.path_join("terrain_splatmap_tex.res")))
 	export_mat.set_shader_parameter("splatmap2", _save_pct(splat2, dir.path_join("terrain_splatmap2_tex.res")))

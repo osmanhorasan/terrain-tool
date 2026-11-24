@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3]
 
 [ext_resource type="Script" path="res://main.gd" id="1"]
-[ext_resource type="PackedScene" path="res://ui/brush_panel.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://addons/terrain_tool/ui/brush_panel.tscn" id="2"]
 
 [sub_resource type="ProceduralSkyMaterial" id="sky_mat"]
 sky_top_color = Color(0.34, 0.54, 0.83, 1)

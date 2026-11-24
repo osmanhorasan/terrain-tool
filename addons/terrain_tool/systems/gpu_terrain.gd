@@ -16,7 +16,7 @@ func _init(hm: Heightmap, splat_tex: ImageTexture, splat2_tex: ImageTexture, lay
 	plane.subdivide_width = hm.size - 1
 	plane.subdivide_depth = hm.size - 1
 	material = ShaderMaterial.new()
-	material.shader = load("res://systems/terrain_gpu.gdshader")
+	material.shader = load("res://addons/terrain_tool/systems/terrain_gpu.gdshader")
 	material.set_shader_parameter("heightmap", hm_tex)
 	material.set_shader_parameter("splatmap", splat_tex)
 	material.set_shader_parameter("splatmap2", splat2_tex)

@@ -82,3 +82,19 @@ Researched against Terrain3D, Unreal Landscape, Unity Terrain Tools, and Gaea:
   Terrace (N steps), Contrast, Sharpen peaks, Smooth all
 - **Contour view mode**: 5 m contour lines over the shaded terrain
 - **Status bar**: hover slope angle next to x/z/h
+
+## Editor plugin (addon)
+
+All reusable code lives under `addons/terrain_tool/`, so the folder can be
+copied into any Godot 4.7+ project:
+
+1. Copy `addons/terrain_tool/` into your project's `addons/` folder
+2. Project → Project Settings → Plugins → enable **Terrain Tool**
+3. Add a **GpuTerrain** node to your scene (heightmap + splatmaps are saved
+   as sub-resources inside your scene file)
+4. Select the node — the Terrain Tool dock appears on the right
+5. Sculpt/paint directly in the editor viewport; strokes go through the
+   editor's own undo system (Ctrl+Z)
+
+Foliage scatter/brush adds MultiMeshInstance children to the node, so they
+persist in the scene too.
