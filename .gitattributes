@@ -9,6 +9,7 @@
 /LICENSE                export-ignore
 /README.md              export-ignore
 /icon.png               export-ignore
+/icon.png.import        export-ignore
 /project.godot          export-ignore
 /main.gd                export-ignore
 /main.gd.uid            export-ignore
